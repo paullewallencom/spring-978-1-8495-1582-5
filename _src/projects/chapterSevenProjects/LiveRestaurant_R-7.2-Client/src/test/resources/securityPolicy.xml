@@ -1,0 +1,10 @@
+<!-- * This software is distributed on an "AS IS" BASIS, * WITHOUT WARRANTIES 
+	OR CONDITIONS OF ANY KIND. -->
+<xwss:SecurityConfiguration dumpMessages="true" xmlns:xwss="http://java.sun.com/xml/ns/xwss/config">
+    <xwss:Timestamp />
+    <!-- case 1:Authenticating of a web service call using Spring Security to authenticate a   user-name token  with plain password  -->
+     <!-- <xwss:UsernameToken name="clinetUser" password="pass" 	 digestPassword="false" useNonce="true"/> --> 
+    
+        <!-- case 2:Authenticating of a web service call using Spring Security to authenticate a   user-name token  with digested password  -->
+         <xwss:UsernameToken name="clinetUser" password="pass" 	 digestPassword="true" useNonce="true"/> 
+</xwss:SecurityConfiguration>

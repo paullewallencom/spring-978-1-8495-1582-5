@@ -1,0 +1,32 @@
+<!-- * This software is distributed on an "AS IS" BASIS, * WITHOUT WARRANTIES 
+	OR CONDITIONS OF ANY KIND. -->
+<xwss:SecurityConfiguration xmlns:xwss="http://java.sun.com/xml/ns/xwss/config"
+	dumpMessages="true">
+
+	<!--Case 1: Encryption/Decryption using a shared symmetric key -->
+
+<!-- 	<xwss:Encrypt>
+		<xwss:SymmetricKey keyAlias="symmetric" />
+		<xwss:Target type="qname">{http://schemas.xmlsoap.org/soap/envelope/}Body
+		</xwss:Target>
+	</xwss:Encrypt>  -->
+	<!---Case 1:End -->
+
+	<!--Case 2: Encryption using a server trusted certificate in client-side 
+		key store(clientStore.jsk) and decryption in server-side private key (serverStore.jks) -->
+<!-- 	<xwss:Encrypt>
+		<xwss:X509Token certificateAlias="server" />
+		<xwss:Target type="qname">{http://schemas.xmlsoap.org/soap/envelope/}Body
+		</xwss:Target>
+	</xwss:Encrypt> -->
+	<!--case 2:End -->
+
+	<!--Case 3: Encryption/Decryption part of playload -->
+ <xwss:Encrypt>
+		<xwss:X509Token certificateAlias="server" />
+		<xwss:Target type="qname">{http://www.packtpub.com/liverestaurant/OrderService/schema}placeOrderRequest
+		</xwss:Target>
+	</xwss:Encrypt> 
+	<!--Case 3:End -->
+
+</xwss:SecurityConfiguration>

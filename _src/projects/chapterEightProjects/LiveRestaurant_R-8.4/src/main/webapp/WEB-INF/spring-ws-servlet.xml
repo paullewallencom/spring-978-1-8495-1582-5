@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- * This software is distributed on an "AS IS" BASIS, * WITHOUT WARRANTIES 
+	OR CONDITIONS OF ANY KIND. -->
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:sws="http://www.springframework.org/schema/web-services"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+       http://www.springframework.org/schema/web-services http://www.springframework.org/schema/web-services/web-services-2.0.xsd
+       http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd">
+
+	<context:component-scan base-package="com.packtpub.liverestaurant.service" />
+
+	<sws:annotation-driven />
+
+	<sws:dynamic-wsdl id="OrderService" portTypeName="OrderService"
+		locationUri="http://localhost:8080/LiveRestaurant/spring-ws/OrderService"
+		targetNamespace="http://www.packtpub.com/liverestaurant/OrderService/schema">
+		<sws:xsd location="/WEB-INF/orderService.xsd" />
+	</sws:dynamic-wsdl>
+
+
+	<sws:interceptors>
+		<bean
+			class="org.springframework.ws.soap.server.endpoint.interceptor.PayloadValidatingInterceptor">
+			<property name="schema" value="/WEB-INF/orderService.xsd" />
+			<property name="validateRequest" value="true" />
+			<property name="validateResponse" value="true" />
+		</bean>
+	    <bean class="org.springframework.ws.soap.server.endpoint.interceptor.SoapEnvelopeLoggingInterceptor"/>
+		<bean
+			class="org.springframework.ws.soap.security.wss4j.Wss4jSecurityInterceptor">
+			<property name="validationActions" value="Signature" />
+			<property name="validationSignatureCrypto">
+				<bean
+					class="org.springframework.ws.soap.security.wss4j.support.CryptoFactoryBean">
+					<property name="keyStorePassword" value="serverPassword" />
+					<property name="keyStoreLocation" value="/WEB-INF/serverStore.jks" />
+				</bean>
+			</property>
+		</bean>
+	</sws:interceptors> 
+
+</beans>
+
+

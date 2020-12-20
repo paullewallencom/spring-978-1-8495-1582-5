@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tns:placeOrderRequest xmlns:tns="http://www.packtpub.com/liverestaurant/OrderService/schema">
+  <tns:order>
+    <tns:refNumber>9999</tns:refNumber>
+    <tns:customer>
+      <tns:addressPrimary>
+        <tns:doorNo>808</tns:doorNo>
+        <tns:building>W8</tns:building>
+        <tns:street>St two</tns:street>
+        <tns:city>NY</tns:city>
+        <tns:country>US</tns:country>
+        <tns:phoneMobile>0018884488</tns:phoneMobile>
+        <tns:phoneLandLine>0017773366</tns:phoneLandLine>
+        <tns:email>d@b.c</tns:email>
+      </tns:addressPrimary>
+      <tns:addressSecondary>
+        <tns:doorNo>409</tns:doorNo>
+        <tns:building>W2</tns:building>
+        <tns:street>St one</tns:street>
+        <tns:city>NY</tns:city>
+        <tns:country>US</tns:country>
+        <tns:phoneMobile>0018882244</tns:phoneMobile>
+        <tns:phoneLandLine>0019991122</tns:phoneLandLine>
+        <tns:email>a@b.c</tns:email>
+      </tns:addressSecondary>
+      <tns:name>
+        <tns:fName>John</tns:fName>
+        <tns:mName>Paul</tns:mName>
+        <tns:lName>Smith</tns:lName>
+      </tns:name>
+    </tns:customer>
+    <tns:dateSubmitted>2008-09-29T05:49:45</tns:dateSubmitted>
+    <tns:orderDate>2014-09-19T03:18:33</tns:orderDate>
+    <tns:items>
+      <tns:type>Snacks</tns:type>
+      <tns:name>Pizza</tns:name>
+      <tns:quantity>2</tns:quantity>
+    </tns:items>
+  </tns:order>
+</tns:placeOrderRequest>

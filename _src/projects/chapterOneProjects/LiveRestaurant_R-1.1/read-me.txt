@@ -1,0 +1,1 @@
+To run the server mvn clean package tomcat:run

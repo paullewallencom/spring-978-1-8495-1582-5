@@ -1,0 +1,10 @@
+Basic requirements for running recipes' projects are:
+Java 6  and Maven 3: For download and installation, please refer to :
+http://maven.apache.org/
+http://www.oracle.com/technetwork/java/javase/downloads/index.html
+
+Some recipes may require additional software, that is explained in the book.
+
+General resources such as schema and input/output sample xml messages are under resources folder.
+
+Each recipe's project(s) runs as independent project(s). To run each recipe, please go to: its chapter project's folder> project folder> follow read-me.txt instructions to run it. 

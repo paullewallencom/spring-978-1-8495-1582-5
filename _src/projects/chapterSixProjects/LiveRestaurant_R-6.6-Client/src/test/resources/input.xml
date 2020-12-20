@@ -1,0 +1,7 @@
+<ns:placeOrderRequest xmlns:ns="http://www.liverestaurant.com/OrderService/schema">
+  <ns:order refNumber="12345"  customerfName="fName"  customerlName="lName" customerTel="12345" dateSubmitted="2008-09-29T05:49:45" orderDate="2008-09-29T05:40:45">
+    <!--1 or more repetitions:-->
+    <ns:item type="Snacks" name="Snacks" quantity="1.0"/>
+     <ns:item type="Desserts" name="Desserts" quantity="1.0"/>    
+  </ns:order>
+</ns:placeOrderRequest>

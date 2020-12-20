@@ -1,0 +1,8 @@
+<!-- * This software is distributed on an "AS IS" BASIS, * WITHOUT WARRANTIES 
+	OR CONDITIONS OF ANY KIND. -->
+<xwss:SecurityConfiguration xmlns:xwss="http://java.sun.com/xml/ns/xwss/config">
+    <xwss:RequireTimestamp maxClockSkew="60" timestampFreshnessLimit="300"/>
+    <xwss:RequireUsernameToken passwordDigestRequired="false" nonceRequired="true"/>
+    <xwss:Timestamp />
+
+</xwss:SecurityConfiguration>

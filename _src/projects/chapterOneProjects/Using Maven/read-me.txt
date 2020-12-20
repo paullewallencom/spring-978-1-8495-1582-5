@@ -1,0 +1,2 @@
+settings.xml shows how to include repositories in the maven setting file. This setting will be applied to all maven builds in the pc on which maven is installed.
+pom.xml shows how to include repositories for specific maven build file.

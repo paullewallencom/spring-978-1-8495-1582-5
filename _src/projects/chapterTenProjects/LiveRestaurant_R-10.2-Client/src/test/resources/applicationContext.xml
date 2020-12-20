@@ -1,0 +1,44 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+
+
+
+	<!--case 1: Setting up a Spring-WS project using Hessian  exposing business 
+		beans -->
+<!-- 	<bean id="orderService"
+		class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
+		<property name="serviceUrl"
+			value="http://localhost:8080/LiveRestaurant/services/OrderService" />
+		<property name="serviceInterface"
+			value="com.packtpub.liverestaurant.service.OrderService" />
+	</bean> -->
+	<!-- case 1 end -->
+
+	<!--case 2: Setting up a Spring-WS project using Burlap exposing business 
+		beans -->
+	<bean id="orderService"
+		class="org.springframework.remoting.caucho.BurlapProxyFactoryBean">
+		<property name="serviceUrl"
+			value="http://localhost:8080/LiveRestaurant/services/OrderService" />
+		<property name="serviceInterface"
+			value="com.packtpub.liverestaurant.service.OrderService" />
+	</bean> 
+	<!-- case 2 end -->
+
+
+
+	<bean id="log4jInitialization"
+		class="org.springframework.beans.factory.config.MethodInvokingFactoryBean">
+		<property name="targetClass" value="org.springframework.util.Log4jConfigurer" />
+		<property name="targetMethod" value="initLogging" />
+		<property name="arguments">
+			<list>
+				<value>src/test/resources/log4j.properties</value>
+			</list>
+		</property>
+	</bean>
+
+
+</beans>

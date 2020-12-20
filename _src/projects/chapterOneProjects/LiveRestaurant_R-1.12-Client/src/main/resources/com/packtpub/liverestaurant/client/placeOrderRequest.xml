@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+* This software is distributed on an "AS IS" BASIS,
+* WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND.
+-->
+<tns:placeOrderRequest xmlns:tns="http://www.packtpub.com/liverestaurant/OrderService/schema">
+  <order>
+    <refNumber>9999</refNumber>
+    <customer>
+      <addressPrimary>
+        <doorNo>808</doorNo>
+        <building>W8</building>
+        <street>St two</street>
+        <city>NY</city>
+        <country>US</country>
+        <phoneMobile>0018884488</phoneMobile>
+        <phoneLandLine>0017773366</phoneLandLine>
+        <email>d@b.c</email>
+      </addressPrimary>
+      <addressSecondary>
+        <doorNo>409</doorNo>
+        <building>W2</building>
+        <street>St one</street>
+        <city>NY</city>
+        <country>US</country>
+        <phoneMobile>0018882244</phoneMobile>
+        <phoneLandLine>0019991122</phoneLandLine>
+        <email>a@b.c</email>
+      </addressSecondary>
+      <name>
+        <fName>John</fName>
+        <mName>Paul</mName>
+        <lName>Smith</lName>
+      </name>
+    </customer>
+    <dateSubmitted>2008-09-29T05:49:45</dateSubmitted>
+    <orderDate>2014-09-19T03:18:33</orderDate>
+    <items>
+      <type>Snacks</type>
+      <name>Pitza</name>
+      <quantity>2</quantity>
+    </items>
+  </order>
+</tns:placeOrderRequest>

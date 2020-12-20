@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:sws="http://www.springframework.org/schema/web-services"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+       http://www.springframework.org/schema/web-services http://www.springframework.org/schema/web-services/web-services-2.0.xsd
+       http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd">
+
+    <context:component-scan base-package="com.packtpub.liverestaurant.service"/>
+<bean class="org.springframework.ws.soap.addressing.server.AnnotationActionEndpointMapping"/>
+    <sws:annotation-driven/>
+
+    <sws:dynamic-wsdl id="OrderService" portTypeName="OrderService" locationUri="http://localhost:8080/liverestaurant/OrderService"
+                      targetNamespace="http://www.liverestaurant.com/OrderService/schema">
+        <sws:xsd location="/WEB-INF/orderService.xsd"/>
+    </sws:dynamic-wsdl>
+    
+      <sws:interceptors>
+         <bean class="org.springframework.ws.server.endpoint.interceptor.PayloadLoggingInterceptor"/>
+    </sws:interceptors>
+
+    
+     <bean class="org.springframework.ws.server.endpoint.adapter.GenericMarshallingMethodEndpointAdapter">
+        <property name="marshaller" ref="marshaller" />
+        <property name="unmarshaller" ref="marshaller" />
+    </bean>
+
+           <bean id="marshaller" class="org.springframework.oxm.xstream.XStreamMarshaller">
+         <property name="autodetectAnnotations" value="true"/>
+   <property name="aliases">
+        <map>
+            <entry key="placeOrderResponse" value="com.packtpub.liverestaurant.domain.PlaceOrderResponse" />
+            <entry key="placeOrderRequest" value="com.packtpub.liverestaurant.domain.PlaceOrderRequest" />
+            <entry key="cancelOrderRequest" value="com.packtpub.liverestaurant.domain.CancelOrderRequest" />
+            <entry key="cancelOrderResponse" value="com.packtpub.liverestaurant.domain.CancelOrderResponse" />
+        </map>
+    </property>
+      </bean>
+
+ 
+    
+    
+    
+    
+    
+    
+  <bean id="messageFactory" class="org.springframework.ws.soap.saaj.SaajSoapMessageFactory"/>
+
+
+</beans>
+
+

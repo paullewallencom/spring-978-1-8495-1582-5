@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+* This software is distributed on an "AS IS" BASIS,
+* WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND.
+-->
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd">
+    <bean id="messageFactory" class="org.springframework.ws.soap.saaj.SaajSoapMessageFactory"/>
+    <bean id="messagingReceiver" class="org.springframework.ws.transport.mail.MailMessageReceiver">
+        <property name="messageFactory" ref="messageFactory"/>
+        <property name="from" value="server@packtpubtest.com"/>
+        <property name="storeUri" value="imap://server@packtpubtest.com/INBOX"/>
+        <property name="transportUri" value="smtp://smtp.packtpubtest.com"/>
+        <property name="messageReceiver" ref="messageDispatcher"/>
+        <property name="session" ref="session"/>
+        <property name="monitoringStrategy">
+            <bean class="org.springframework.ws.transport.mail.monitor.Pop3PollingMonitoringStrategy">
+                <property name="pollingInterval" value="1000"/>
+            </bean>
+        </property>
+    </bean>
+    <bean id="messageDispatcher" class="org.springframework.ws.soap.server.SoapMessageDispatcher">
+        <property name="endpointMappings">
+            <bean class="org.springframework.ws.server.endpoint.mapping.PayloadRootQNameEndpointMapping">
+                <property name="defaultEndpoint">
+                    <bean class="com.packtpub.liverestaurant.service.endpoint.SimplePayloadEndpoint">
+                    <property name="orderService">
+                        <bean class="com.packtpub.liverestaurant.service.OrderServiceImpl"/>
+                    </property>
+                    </bean>
+                </property>
+            </bean>
+        </property>
+    </bean>
+    <bean id="webServiceTemplate" class="org.springframework.ws.client.core.WebServiceTemplate">
+        <constructor-arg ref="messageFactory"/>
+        <property name="messageSender">
+            <bean class="org.springframework.ws.transport.mail.MailMessageSender">
+                <property name="from" value="client@packtpubtest.com"/>
+                <property name="transportUri" value="smtp://smtp.packtpubtest.com"/>
+                <property name="storeUri" value="imap://client@packtpubtest.com/INBOX"/>
+                <property name="receiveSleepTime" value="1500"/>
+                <property name="session" ref="session"/>
+            </bean>
+        </property>
+        <property name="defaultUri" value="mailto:server@packtpubtest.com"/>
+    </bean>
+        <bean id="session" class="javax.mail.Session" factory-method="getInstance">
+        <constructor-arg>
+            <props/>
+        </constructor-arg>
+    </bean>
+    
+    	<bean id="log4jInitialization"
+		class="org.springframework.beans.factory.config.MethodInvokingFactoryBean">
+		<property name="targetClass" value="org.springframework.util.Log4jConfigurer" />
+		<property name="targetMethod" value="initLogging" />
+		<property name="arguments">
+			<list>
+				<value>src/test/resources/log4j.properties</value>
+			</list>
+		</property>
+	</bean>	
+    
+    
+</beans>

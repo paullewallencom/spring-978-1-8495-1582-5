@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<tns:CancelOrderRequest xmlns:tns="http://www.packtpub.com/liverestaurant/OrderService/schema">
+  <tns:refNumber>9999</tns:refNumber>
+</tns:CancelOrderRequest>

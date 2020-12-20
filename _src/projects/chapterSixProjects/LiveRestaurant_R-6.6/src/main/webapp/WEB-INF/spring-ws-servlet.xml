@@ -1,0 +1,43 @@
+<?xml  version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:sws="http://www.springframework.org/schema/web-services"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+       http://www.springframework.org/schema/web-services http://www.springframework.org/schema/web-services/web-services-2.0.xsd
+       http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd">
+
+	<sws:annotation-driven marshaller="customMarshaller"  unmarshaller="customMarshaller"/>
+<context:component-scan base-package="com.packtpub.liverestaurant.service.endpoint" /> 
+<context:component-scan base-package="com.packtpub.liverestaurant.domain"  />
+
+	
+
+	<sws:dynamic-wsdl id="OrderService" portTypeName="OrderService"
+		locationUri="http://www.packtpub.com/liverestaurant/OrderService/schema"
+		targetNamespace="http://www.packtpub.com/liverestaurant/OrderService/schema">
+		<sws:xsd location="/WEB-INF/OrderService.xsd" />
+	</sws:dynamic-wsdl>
+
+
+     <bean class="org.springframework.ws.server.endpoint.adapter.GenericMarshallingMethodEndpointAdapter">
+        <property name="marshaller" ref="customMarshaller" />
+        <property name="unmarshaller" ref="customMarshaller" />
+    </bean>
+
+	
+
+       <bean id="customMarshaller"
+          class="com.packtpub.liverestaurant.marshaller.ServerCustomMarshaller">
+          
+               <property name="registeredClassNames">
+            <list>
+                <value>PlaceOrderRequest</value>
+               <value>PlaceOrderResponse</value>
+            </list>
+        </property>
+       
+    </bean>
+	
+
+
+</beans>      

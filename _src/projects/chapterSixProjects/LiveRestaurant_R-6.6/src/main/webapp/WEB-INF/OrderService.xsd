@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema"
+    targetNamespace="http://www.packtpub.com/LiveRestaurant/OrderService/schema"
+    xmlns:tns="http://www.packtpub.com/LiveRestaurant/OrderService/schema"
+    elementFormDefault="qualified"
+    xmlns:QOrder="http://www.packtpub.com/LiveRestaurant/OrderService/schema">
+
+    <element name="placeOrderRequest">
+        <complexType>
+            <sequence>
+                <element name="order" type="QOrder:Order"></element>
+            </sequence>
+        </complexType>
+    </element>
+
+    <element name="placeOrderResponse">
+        <complexType>
+            <sequence>
+                <element name="refNumber" type="string"></element>
+            </sequence>
+        </complexType>
+    </element>
+
+    <element name="cancelOrderRequest">
+        <complexType>
+            <sequence>
+                <element name="refNumber" type="string"></element>
+            </sequence>
+        </complexType>
+    </element>
+
+    <element name="cancelOrderResponse">
+        <complexType>
+            <sequence>
+                <element name="cancelled" type="boolean"></element>
+            </sequence>
+        </complexType>
+    </element>
+
+  <complexType name="Order">
+      <sequence>
+          <element name="refNumber" type="string"></element>
+          <element name="customerfName" type="string"></element>
+           <element name="customerlName" type="string"></element>
+          <element name="customerTel" type="string"></element>
+          <element name="dateSubmitted" type="dateTime"></element>
+          <element name="orderDate" type="dateTime"></element>
+          <element name="items" type="QOrder:FoodItem"
+              maxOccurs="unbounded" minOccurs="1">
+          </element>
+      </sequence>
+  </complexType>
+
+    <simpleType name="FoodItemType">
+        <restriction base="string">
+            <enumeration value="Snacks"></enumeration>
+            <enumeration value="Beverages"></enumeration>
+            <enumeration value="Starters"></enumeration>
+            <enumeration value="Meals"></enumeration>
+            <enumeration value="Coffee"></enumeration>
+            <enumeration value="Juices"></enumeration>
+            <enumeration value="Desserts"></enumeration>
+        </restriction>
+    </simpleType>
+
+    <complexType name="FoodItem">
+        <sequence>
+            <element name="type" type="QOrder:FoodItemType"></element>
+            <element name="name" type="string"></element>
+            <element name="quantity" type="double"></element>
+        </sequence>
+    </complexType>
+</schema>

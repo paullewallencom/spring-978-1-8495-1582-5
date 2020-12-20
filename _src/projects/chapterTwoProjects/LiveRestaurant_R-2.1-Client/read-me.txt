@@ -1,0 +1,2 @@
+To run the server mvn clean package tomcat:run
+To run the client: Run by eclipse as Java Application(OrderServiceClient.java) and Junit(OrderServiceClientTest.java)

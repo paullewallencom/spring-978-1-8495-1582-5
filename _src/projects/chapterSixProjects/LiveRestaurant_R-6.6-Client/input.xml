@@ -1,0 +1,6 @@
+<ns:placeOrderRequest xmlns:ns="http://www.packtpub.com/LiveRestaurant/OrderService/schema">
+  <ns:order refNumber="12345"  customerfName="fName"  customerlName="lName" customerTel="12345" dateSubmitted="2008-09-29 05:49:45" orderDate="2008-09-29 05:40:45">
+    <ns:item type="SNACKS" name="Snacks" quantity="1.0"/>
+     <ns:item type="DESSERTS" name="Desserts" quantity="1.0"/>    
+  </ns:order>
+</ns:placeOrderRequest>

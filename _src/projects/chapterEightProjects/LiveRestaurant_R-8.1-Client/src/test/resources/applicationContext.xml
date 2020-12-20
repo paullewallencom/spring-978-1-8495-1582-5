@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- * This software is distributed on an "AS IS" BASIS, * WITHOUT WARRANTIES 
+	OR CONDITIONS OF ANY KIND. -->
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:util="http://www.springframework.org/schema/util" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans-2.0.xsd
+        http://www.springframework.org/schema/util
+        http://www.springframework.org/schema/util/spring-util-2.0.xsd
+        http://www.springframework.org/schema/oxm 
+       	http://www.springframework.org/schema/oxm/spring-oxm-1.5.xsd">
+
+	<bean id="messageFactory" class="org.springframework.ws.soap.saaj.SaajSoapMessageFactory" />
+	<bean id="webServiceTemplate" class="org.springframework.ws.client.core.WebServiceTemplate">
+		<constructor-arg ref="messageFactory" />
+		<property name="defaultUri"
+			value="http://localhost:8080/LiveRestaurant/spring-ws/OrderService" />
+		<property name="interceptors">
+			<list>
+				<ref local="wss4jSecurityInterceptor" />
+			</list>
+		</property>
+	</bean>
+	<bean id="wss4jSecurityInterceptor"
+		class="org.springframework.ws.soap.security.wss4j.Wss4jSecurityInterceptor">
+		<property name="securementActions" value="UsernameToken" />
+		<property name="securementUsername" value="admin" />
+		<property name="securementPassword" value="password" />
+		<!--  case 1: 'Authenticate using user-name token with plain password' -->
+	    <property name="securementPasswordType" value="PasswordText" /> 
+		<!--  case 1: End -->
+		<!--  case 2: 'Authenticate using user-name token with digest password' -->
+		<!--  <property name="securementPasswordType" value="PasswordDigest" />  -->
+		<!--  case 2: End -->		
+	</bean> 
+	<bean id="log4jInitialization"
+		class="org.springframework.beans.factory.config.MethodInvokingFactoryBean">
+		<property name="targetClass" value="org.springframework.util.Log4jConfigurer" />
+		<property name="targetMethod" value="initLogging" />
+		<property name="arguments">
+			<list>
+				<value>src/test/resources/log4j.properties</value>
+			</list>
+		</property>
+	</bean>
+</beans>

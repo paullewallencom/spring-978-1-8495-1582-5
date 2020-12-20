@@ -1,0 +1,2 @@
+Change userName and password in applicationContext.xml into your own
+To run: mvn clean package 

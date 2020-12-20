@@ -1,0 +1,11 @@
+To run the server mvn clean package tomcat:run
+
+To run the client:  mvn clean package  
+
+
+******************************************
+run to clean previous eclipse settings for the project : mvn eclipse:clean
+
+To import into eclipse run: 
+from folder LiveRestaurant_R-8.4 run: mvn eclipse:eclipse -Declipse.projectNameTemplate="LiveRestaurant_R-8.4"
+from folder LiveRestaurant_R-8.4-Client run: mvn eclipse:eclipse -Declipse.projectNameTemplate="LiveRestaurant_R-8.4-Client"

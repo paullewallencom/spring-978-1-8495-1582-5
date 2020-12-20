@@ -1,0 +1,88 @@
+<?xml  version="1.0" encoding="UTF-8"?>
+<!-- * This software is distributed on an "AS IS" BASIS, * WITHOUT WARRANTIES 
+	OR CONDITIONS OF ANY KIND. -->
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:sws="http://www.springframework.org/schema/web-services"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+       http://www.springframework.org/schema/web-services http://www.springframework.org/schema/web-services/web-services-2.0.xsd
+       http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd">
+
+	<context:component-scan base-package="com.packtpub.liverestaurant.service" />
+
+	<sws:annotation-driven />
+
+	<sws:dynamic-wsdl id="OrderService" portTypeName="OrderService"
+		locationUri="http://localhost:8080/LiveRestaurant/spring-ws/OrderService"
+		targetNamespace="http://www.packtpub.com/liverestaurant/OrderService/schema">
+		<sws:xsd location="/WEB-INF/orderService.xsd" />
+	</sws:dynamic-wsdl>
+
+
+	<sws:interceptors>
+	<bean class="org.springframework.ws.soap.server.endpoint.interceptor.SoapEnvelopeLoggingInterceptor"/>
+	<!--Case 1: Encryption/Decryption using a shared symmetric key -->
+<!--    <bean class="org.springframework.ws.soap.security.wss4j.Wss4jSecurityInterceptor">
+    <property name="validationActions" value="Encrypt"/>
+      
+    <property name="validationCallbackHandler">
+        <bean class="org.springframework.ws.soap.security.wss4j.callback.KeyStoreCallbackHandler">
+            <property name="keyStore">
+                <bean class="org.springframework.ws.soap.security.support.KeyStoreFactoryBean">
+                    <property name="location" value="/WEB-INF/symmetricStore.jks"/>
+                    <property name="type" value="JCEKS"/>
+                    <property name="password" value="symmetricPassword"/>
+                </bean>
+            </property>
+            <property name="symmetricKeyPassword" value="keyPassword"/>
+        </bean>
+    </property>
+</bean>  -->
+	<!--Case 1: End -->
+	 <bean class="org.springframework.ws.soap.server.endpoint.interceptor.SoapEnvelopeLoggingInterceptor"/>
+		<!--case 2 or case 3: Encryption using a server trusted certificate in client-side 
+		key store(clientStore.jsk) and decryption in server-side private key (serverStore.jks) -->
+   
+  	 <bean
+		class="org.springframework.ws.soap.security.wss4j.Wss4jSecurityInterceptor">
+		<property name="validationActions" value="Encrypt" />
+		<!-- case 3 only-->
+		<property name="securementEncryptionParts"
+value="{Content}{http://www.packtpub.com/liverestaurant/OrderService/schema}placeOrderRequest"/>
+	<!-- case 3 end -->
+		<property name="validationDecryptionCrypto">
+	
+		
+			<bean
+				class="org.springframework.ws.soap.security.wss4j.support.CryptoFactoryBean">
+				<property name="keyStorePassword" value="serverPassword" />
+				<property name="keyStoreLocation" value="/WEB-INF/serverStore.jks" />
+			</bean>
+		</property>
+		<property name="validationCallbackHandler">
+			<bean
+				class="org.springframework.ws.soap.security.wss4j.callback.KeyStoreCallbackHandler">
+				<property name="privateKeyPassword" value="serPkPassword" />
+			</bean>
+		</property>
+	</bean>  
+
+
+	<!--case 2 or 3: End -->
+
+
+	</sws:interceptors>
+
+
+	
+
+
+
+
+	
+	
+
+
+</beans>
+
+

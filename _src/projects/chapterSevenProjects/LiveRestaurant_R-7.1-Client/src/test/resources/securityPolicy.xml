@@ -1,0 +1,9 @@
+<!--
+* This software is distributed on an "AS IS" BASIS,
+* WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND.
+-->
+<xwss:SecurityConfiguration dumpMessages="true" xmlns:xwss="http://java.sun.com/xml/ns/xwss/config">
+    <xwss:Timestamp />
+ <xwss:UsernameToken name="clinetUser" password="pass" 	 digestPassword="false" useNonce="true"/>  <!--case 1:Authenticate using plain user-name token  with plain text password -->
+     <!--     <xwss:UsernameToken name="clinetUser" password="pass" 	 digestPassword="true" useNonce="true"/> --> <!--case 2:Authenticate using  user-name token with digest password-->
+</xwss:SecurityConfiguration>

@@ -1,0 +1,70 @@
+<?xml  version="1.0" encoding="UTF-8"?>
+<!-- * This software is distributed on an "AS IS" BASIS, * WITHOUT WARRANTIES 
+	OR CONDITIONS OF ANY KIND. -->
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:sws="http://www.springframework.org/schema/web-services"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+       http://www.springframework.org/schema/web-services http://www.springframework.org/schema/web-services/web-services-2.0.xsd
+       http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd">
+
+	<context:component-scan base-package="com.packtpub.liverestaurant.service" />
+
+	<sws:annotation-driven />
+
+	<sws:dynamic-wsdl id="OrderService" portTypeName="OrderService"
+		locationUri="http://localhost:8080/LiveRestaurant/spring-ws/OrderService"
+		targetNamespace="http://www.packtpub.com/liverestaurant/OrderService/schema">
+		<sws:xsd location="/WEB-INF/orderService.xsd" />
+	</sws:dynamic-wsdl>
+
+
+	 <sws:interceptors>
+		<bean
+			class="org.springframework.ws.soap.security.xwss.XwsSecurityInterceptor">
+			<property name="policyConfiguration" value="/WEB-INF/securityPolicy.xml" />
+			<property name="callbackHandlers">
+				<list>
+					<ref bean="keyStoreHandler" />
+
+				</list>
+			</property>
+		</bean>
+	</sws:interceptors> 
+<!--Case 1: Encryption/Decryption using a shared symmetric key -->
+
+<!-- 	<bean id="keyStoreHandler"
+		class="org.springframework.ws.soap.security.xwss.callback.KeyStoreCallbackHandler">
+		<property name="symmetricStore" ref="symmetricStore" />
+		<property name="symmetricKeyPassword" value="keyPassword" />
+	</bean>
+	<bean id="symmetricStore"
+		class="org.springframework.ws.soap.security.support.KeyStoreFactoryBean">
+		<property name="password" value="symmetricPassword" />
+		<property name="location" value="/WEB-INF/symmetricStore.jks" />
+		<property name="type" value="JCEKS" />
+	</bean>  --> 
+	<!--Case 1: End -->
+
+	<!--case 2 or case 3: Encryption using a server trusted certificate in client-side 
+		key store(clientStore.jsk) and decryption in server-side private key (in serverStore.jks) -->
+	<bean id="keyStoreHandler"
+		class="org.springframework.ws.soap.security.xwss.callback.KeyStoreCallbackHandler">
+		<property name="keyStore" ref="keyStore" />
+
+		<property name="privateKeyPassword" value="serPkPassword" />
+
+		<property name="defaultAlias" value="server" />
+	</bean>
+
+	<bean id="keyStore"
+		class="org.springframework.ws.soap.security.support.KeyStoreFactoryBean">
+		<property name="location" value="/WEB-INF/serverStore.jks" />
+		<property name="password" value="serverPassword" />
+	</bean> 
+	<!--case 2 or 3: End -->
+
+
+</beans>
+
+

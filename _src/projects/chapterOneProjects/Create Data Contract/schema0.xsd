@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://www.packtpub.com/liverestaurant/OrderService/schema" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="placeOrderRequest">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="order">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element type="xs:short" name="refNumber"/>
+              <xs:element name="customer">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="addressPrimary">
+                      <xs:complexType>
+                        <xs:sequence>
+                          <xs:element type="xs:short" name="doorNo"/>
+                          <xs:element type="xs:string" name="building"/>
+                          <xs:element type="xs:string" name="street"/>
+                          <xs:element type="xs:string" name="city"/>
+                          <xs:element type="xs:string" name="country"/>
+                          <xs:element type="xs:int" name="phoneMobile"/>
+                          <xs:element type="xs:int" name="phoneLandLine"/>
+                          <xs:element type="xs:string" name="email"/>
+                        </xs:sequence>
+                      </xs:complexType>
+                    </xs:element>
+                    <xs:element name="addressSecondary">
+                      <xs:complexType>
+                        <xs:sequence>
+                          <xs:element type="xs:short" name="doorNo"/>
+                          <xs:element type="xs:string" name="building"/>
+                          <xs:element type="xs:string" name="street"/>
+                          <xs:element type="xs:string" name="city"/>
+                          <xs:element type="xs:string" name="country"/>
+                          <xs:element type="xs:int" name="phoneMobile"/>
+                          <xs:element type="xs:int" name="phoneLandLine"/>
+                          <xs:element type="xs:string" name="email"/>
+                        </xs:sequence>
+                      </xs:complexType>
+                    </xs:element>
+                    <xs:element name="name">
+                      <xs:complexType>
+                        <xs:sequence>
+                          <xs:element type="xs:string" name="fName"/>
+                          <xs:element type="xs:string" name="mName"/>
+                          <xs:element type="xs:string" name="lName"/>
+                        </xs:sequence>
+                      </xs:complexType>
+                    </xs:element>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+              <xs:element type="xs:dateTime" name="dateSubmitted"/>
+              <xs:element type="xs:dateTime" name="orderDate"/>
+              <xs:element name="items">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element type="xs:string" name="type"/>
+                    <xs:element type="xs:string" name="name"/>
+                    <xs:element type="xs:byte" name="quantity"/>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="cancelOrderRequest">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element type="xs:short" name="refNumber"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

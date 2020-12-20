@@ -1,0 +1,9 @@
+To run the server mvn clean package 
+ 
+
+
+******************************************
+run to clean previous eclipse settings for the project : mvn eclipse:clean
+
+To import into eclipse run: 
+from folder LiveRestaurant_R-3.2 run: mvn eclipse:eclipse -Declipse.projectNameTemplate="LiveRestaurant_R-3.2"

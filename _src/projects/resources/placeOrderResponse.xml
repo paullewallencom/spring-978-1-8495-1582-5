@@ -1,0 +1,3 @@
+<tns:placeOrderResponse xmlns:tns="http://www.packtpub.com/LiveRestaurant/OrderService/schema">
+  <tns:refNumber>John Smith-9999</tns:refNumber>
+</tns:placeOrderResponse>

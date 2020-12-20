@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:util="http://www.springframework.org/schema/util" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans-2.0.xsd
+        http://www.springframework.org/schema/util
+        http://www.springframework.org/schema/util/spring-util-2.0.xsd
+        http://www.springframework.org/schema/oxm 
+       	http://www.springframework.org/schema/oxm/spring-oxm-1.5.xsd">
+
+	<bean id="messageFactory" class="org.springframework.ws.soap.saaj.SaajSoapMessageFactory" />
+
+
+	
+ 	   <bean id="webServiceTemplate" class="org.springframework.ws.client.core.WebServiceTemplate">
+        <constructor-arg ref="messageFactory" />
+        <property name="marshaller" ref="marshaller"></property>
+        <property name="unmarshaller" ref="marshaller"></property>
+        <property name="defaultUri" value="http://localhost:8080/LiveRestaurant/OrderService" />
+    </bean> 
+	
+
+    
+    <!-- 	<bean id="cancelOrderResponseUnMarshaller" class="org.springframework.oxm.jibx.JibxMarshaller">
+		<property name="targetClass"
+			value="com.packtpub.liverestaurant.domain.CancelOrderResponse" />
+			
+	</bean> -->
+
+	<bean id="marshaller" class="org.springframework.oxm.jibx.JibxMarshaller">
+		<property name="targetClass"
+			value="com.packtpub.liverestaurant.domain.CancelOrderRequest" />
+			
+			
+	</bean>
+	
+
+    
+   
+
+      <bean id="log4jInitialization"
+		class="org.springframework.beans.factory.config.MethodInvokingFactoryBean">
+		<property name="targetClass" value="org.springframework.util.Log4jConfigurer" />
+		<property name="targetMethod" value="initLogging" />
+		<property name="arguments">
+			<list>
+				<value>src/test/resources/log4j.properties</value>
+			</list>
+		</property>
+	</bean>	
+	
+</beans>

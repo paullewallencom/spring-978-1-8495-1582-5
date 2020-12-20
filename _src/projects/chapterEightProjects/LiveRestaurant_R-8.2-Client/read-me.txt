@@ -1,0 +1,12 @@
+To run the server mvn clean package tomcat:run
+To run the client:  mvn clean package  
+
+The only difference between case 1 and case 2 is on 
+client-side application context (follow comments in applicationContext.xml).
+server-side application context (follow comments in spring-ws-servlet.xml).
+******************************************
+run to clean previous eclipse settings for the project : mvn eclipse:clean
+
+To import into eclipse run: 
+from folder LiveRestaurant_R-8.2 run: mvn eclipse:eclipse -Declipse.projectNameTemplate="LiveRestaurant_R-8.2"
+from folder LiveRestaurant_R-8.2-Client run: mvn eclipse:eclipse -Declipse.projectNameTemplate="LiveRestaurant_R-8.2-Client"

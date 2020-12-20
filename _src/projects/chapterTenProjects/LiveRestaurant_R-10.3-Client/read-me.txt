@@ -1,0 +1,14 @@
+To run the server mvn clean package exec:java
+To run the client:  mvn clean package  
+
+@XmlRootElement is removed from 
+PlaceOrderRequest,PlaceOrderResponse
+CancelOrderRequest,CancelOrderResponse
+*****************************************
+Tested with Java Runtime Environment (build jdk1.6.0_29)))
+******************************************
+run to clean previous eclipse settings for the project : mvn eclipse:clean
+
+To import into eclipse run: 
+from folder LiveRestaurant_R-3.1 run: mvn eclipse:eclipse -Declipse.projectNameTemplate="LiveRestaurant_R-3.1"
+from folder LiveRestaurant_R-3.1-Client run: mvn eclipse:eclipse -Declipse.projectNameTemplate="LiveRestaurant_R-3.1-Client"

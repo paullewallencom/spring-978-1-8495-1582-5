@@ -1,0 +1,3 @@
+To run the server mvn clean package tomcat:run
+To run the client: OrderServiceClient.java:  mvn clean package  exec:java 
+               OrderServiceClientTest.java: mvn clean package

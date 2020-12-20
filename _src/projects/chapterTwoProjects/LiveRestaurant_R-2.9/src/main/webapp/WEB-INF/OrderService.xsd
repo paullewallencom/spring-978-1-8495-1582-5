@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+* This software is distributed on an "AS IS" BASIS,
+* WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND.
+-->
+<schema xmlns="http://www.w3.org/2001/XMLSchema"
+    targetNamespace="http://www.packtpub.com/LiveRestaurant/OrderService/schema"
+    xmlns:tns="http://www.packtpub.com/LiveRestaurant/OrderService/schema"
+    elementFormDefault="qualified"
+    xmlns:QOrder="http://www.packtpub.com/LiveRestaurant/OrderService/schema">
+
+    <element name="OrderRequest">
+        <complexType>
+            <sequence>
+                <element name="message" type="string"></element>
+            </sequence>
+        </complexType>
+    </element>
+
+    <element name="OrderResponse">
+        <complexType>
+            <sequence>
+                <element name="message" type="string"></element>
+            </sequence>
+        </complexType>
+    </element>
+
+    <element name="CancelOrderRequest">
+        <complexType>
+            <sequence>
+                <element name="ref" type="string"></element>
+            </sequence>
+        </complexType>
+    </element>
+
+    <element name="CancelOrderResponse">
+        <complexType>
+            <sequence>
+                <element name="message" type="string"></element>
+            </sequence>
+        </complexType>
+    </element>
+  
+</schema>

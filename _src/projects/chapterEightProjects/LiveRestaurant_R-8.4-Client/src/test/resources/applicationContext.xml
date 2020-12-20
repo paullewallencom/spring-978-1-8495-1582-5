@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- * This software is distributed on an "AS IS" BASIS, * WITHOUT WARRANTIES 
+	OR CONDITIONS OF ANY KIND. -->
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:sws="http://www.springframework.org/schema/web-services"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+	http://www.springframework.org/schema/web-services
+      http://www.springframework.org/schema/web-services/web-services-2.0.xsd">
+
+	<bean id="messageFactory" class="org.springframework.ws.soap.saaj.SaajSoapMessageFactory" />
+	<bean id="webServiceTemplate" class="org.springframework.ws.client.core.WebServiceTemplate">
+		<constructor-arg ref="messageFactory" />
+		<property name="defaultUri"
+			value="http://localhost:8080/LiveRestaurant/spring-ws/OrderService" />
+		<property name="interceptors">
+
+		<bean
+			class="org.springframework.ws.soap.security.wss4j.Wss4jSecurityInterceptor">
+			<property name="securementActions" value="Signature" />
+			<property name="securementSignatureKeyIdentifier" value="DirectReference" />
+			<property name="securementUsername" value="client" />
+			<property name="securementPassword" value="cliPkPassword" />
+			<property name="securementSignatureCrypto">
+				<bean
+					class="org.springframework.ws.soap.security.wss4j.support.CryptoFactoryBean">
+					<property name="keyStorePassword" value="clientPassword" />
+					<property name="keyStoreLocation" value="classpath:/clientStore.jks" />
+				</bean>
+			</property>
+		</bean>
+	</property>
+	</bean>	
+
+	<bean id="log4jInitialization"
+		class="org.springframework.beans.factory.config.MethodInvokingFactoryBean">
+		<property name="targetClass" value="org.springframework.util.Log4jConfigurer" />
+		<property name="targetMethod" value="initLogging" />
+		<property name="arguments">
+			<list>
+				<value>src/test/resources/log4j.properties</value>
+			</list>
+		</property>
+	</bean>
+</beans>

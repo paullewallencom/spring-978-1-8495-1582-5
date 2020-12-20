@@ -1,0 +1,12 @@
+To run the server mvn clean package then copy war in tomcat webapp folder
+To run the client:  mvn clean package  
+
+
+******************************************
+run to clean previous eclipse settings for the project : mvn eclipse:clean
+
+To import into eclipse run: 
+
+comment plugins tag in pom before follwoing command and un-comment after run:
+from folder LiveRestaurant_R-6.6 run: mvn eclipse:eclipse -Declipse.projectNameTemplate="LiveRestaurant_R-6.3"
+from folder LiveRestaurant_R-R-6.3-Client run: mvn eclipse:eclipse -Declipse.projectNameTemplate="LiveRestaurant_R-R-6.3-Client"

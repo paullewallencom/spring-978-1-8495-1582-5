@@ -1,0 +1,2 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tns:cancelOrderResponse xmlns:tns="http://www.packtpub.com/liverestaurant/OrderService/schema"><tns:cancelled>true</tns:cancelled></tns:cancelOrderResponse>

@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:util="http://www.springframework.org/schema/util" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans-2.0.xsd
+        http://www.springframework.org/schema/util
+        http://www.springframework.org/schema/util/spring-util-2.0.xsd
+        http://www.springframework.org/schema/oxm 
+       	http://www.springframework.org/schema/oxm/spring-oxm-1.5.xsd">
+
+	<bean id="messageFactory" class="org.springframework.ws.soap.saaj.SaajSoapMessageFactory" />
+
+<!-- 	<bean id="webServiceTemplate" class="org.springframework.ws.client.core.WebServiceTemplate">
+		<constructor-arg ref="messageFactory" />
+		<property name="defaultUri" value="http://localhost:8080/LiveRestaurant/spring-ws/OrderService" />
+		<property name="interceptors">
+		
+		<list>
+ 			
+			<bean 	class="com.packtpub.liverestaurant.client.WSClientInterceptor">
+		</bean>
+			</list>
+		</property>
+	</bean> -->
+	
+	<bean id="orderServiceProxy"
+        class="com.packtpub.liverestaurant.client.OrderServiceProxy">
+        <property name="defaultUri"
+            value="http://localhost:8080/LiveRestaurant/spring-ws/OrderService" />
+        <property name="marshaller" ref="mooseMarshaller" />
+        <property name="unmarshaller" ref="mooseMarshaller" />
+    </bean>
+    
+
+    
+<bean class="org.springframework.ws.server.endpoint.adapter.GenericMarshallingMethodEndpointAdapter">
+        <constructor-arg ref="mooseMarshaller"/>
+    </bean>
+    <bean class="org.springframework.ws.server.endpoint.mapping.PayloadRootAnnotationMethodEndpointMapping"/>
+
+    <bean id="mooseMarshaller" class="com.quigley.moose.spring.MooseMarshaller">
+        <property name="mappingProvider"><ref bean="mooseMappingProvider"/></property>
+    </bean>
+
+    <bean id="mooseMappingProvider" 
+        class="com.quigley.moose.mapping.provider.annotation.AnnotationMappingProvider">
+        <property name="xmlNamespace">
+                <value>http://www.liverestaurant.com/OrderService/schema</value></property>
+        <property name="xmlPrefix"><value>ns</value></property>
+        <property name="annotatedClassesProvider"><ref bean="mooseClassesProvider"/></property>
+    </bean>
+
+    <bean id="mooseClassesProvider" 
+        class="com.quigley.moose.mapping.provider.annotation.StaticClassesProvider">
+        <property name="classes">
+            <list>
+                <value>com.packtpub.liverestaurant.domain.CancelOrderRequest</value>
+                <value>com.packtpub.liverestaurant.domain.CancelOrderResponse</value>
+                <value>com.packtpub.liverestaurant.domain.Order</value>
+                 <value>com.packtpub.liverestaurant.domain.Address</value>
+                 <value>com.packtpub.liverestaurant.domain.Customer</value>
+                 <value>com.packtpub.liverestaurant.domain.FoodItem</value>
+                 <value>com.packtpub.liverestaurant.domain.Name</value>                                  
+                <value>com.packtpub.liverestaurant.domain.PlaceOrderResponse</value>
+                <value>com.packtpub.liverestaurant.domain.PlaceOrderRequest</value>
+               
+            </list>  
+        </property>
+    </bean>
+
+    <bean id="mooseSchema" class="com.quigley.moose.spring.MooseXsdSchema">
+        <property name="mappingProvider"><ref bean="mooseMappingProvider"/></property>
+    </bean>
+ 
+    
+    
+	
+</beans>
